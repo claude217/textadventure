@@ -1,0 +1,28 @@
+start
+  = command
+
+action
+  = [a-z]+
+
+move
+  = [a-z]+
+
+direction
+  = [a-z][a-z]*
+
+object
+  = [a-z]+
+
+sep
+  = [ ]*
+  
+command
+  = a:sep action:action b:sep target:object c:sep
+     { var act = action.join("");
+var obj = target.join("");
+return {act, obj}; 
+}
+  / a:sep move:move b:sep direction:direction c:sep
+     { return {move, direction}; }
+  / move
+  / action
